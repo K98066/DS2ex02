@@ -181,6 +181,8 @@ public:
 	void insert_node(tree_node*& root_node, data_node new_insert_data) { // 插入資料 
 		// 建立新節點 
 		tree_node* cur_node = root_node;
+		// 暫時的正確父節點 
+		tree_node* temp_father;
 		
 		// 如果傳進來的樹是空子樹
 		if (is_empty(root_node)) {
@@ -196,8 +198,6 @@ public:
 					break;
 				} 
 				
-				// 在每次移動前，先決定好father的指向，應該要是移動前的自己 
-				cur_node->father = cur_node;
 				if (new_insert_data.graduate_count < cur_node->school_info[0].graduate_count) { // 比vector裡最小的還小->左子樹 
 					if (is_empty(cur_node->smaller_node)) { // 抵達葉子 
 						break;
@@ -310,24 +310,15 @@ void build_tree(vector<data_node> student_count) {
         }
         
         two_three_tree_root->insert_node(two_three_tree_root, student_count[i]);
-        
-    	tree_node* temp_root = two_three_tree_root;
-    	print_node = temp_root->get_info();
-    	cout << "root size: " << print_node.size() << endl;
     }
      
     print_node = two_three_tree_root->get_info();
     cout << "root size: " << print_node.size() << endl;
-    
-    cout << print_node[0].school_name << ", " << print_node[0].major_name << ", " << print_node[0].student_count << ", " << print_node[0].graduate_count << endl;
-    cout << print_node[1].school_name << ", " << print_node[1].major_name << ", " << print_node[1].student_count << ", " << print_node[1].graduate_count << endl;
-    cout << print_node[2].school_name << ", " << print_node[2].major_name << ", " << print_node[2].student_count << ", " << print_node[2].graduate_count << endl;
-	/*   
-	/*   
+
     tree_node* temp_root = two_three_tree_root;
     print_node = temp_root->get_info();
     
-    while(temp_root != nullptr) {
+    while(temp_root != NULL) {
     	tree_height++;
     	temp_root->find_height(temp_root);
 	}
@@ -339,7 +330,7 @@ void build_tree(vector<data_node> student_count) {
 		cout << cur_num << ": " << "[" << print_node[cur_num].id << "] " << print_node[cur_num].school_name << ", " << print_node[cur_num].major_name << ", " << print_node[cur_num].day_night_e << " " << print_node[cur_num].day_night_c << ", " << print_node[cur_num].level_e << " " << print_node[cur_num].level_c << ", " << print_node[cur_num].student_count << ", " << print_node[cur_num].graduate_count << endl;
 		cur_num++;
 	}
-	*/ 
+
 }
 
 int main() {
